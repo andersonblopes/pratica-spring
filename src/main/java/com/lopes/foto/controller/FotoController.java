@@ -31,6 +31,7 @@ public class FotoController {
     public String upload(@RequestParam("foto") MultipartFile foto, RedirectAttributes redirectAttributes) {
         //TODO Proteger o sistema contra envio de arquivos não suportados
         //TODO Tratar erro de tentativa de upload de arquivo com tamanho superior ao definido nas configurações
+        //TODO Recriar WS para upload de arquivos.
         LOGGER.info("Upload de foto ---> " + foto.getOriginalFilename());
         discoService.salvarFoto(foto);
         String mensagem = String.format("Upload de foto ---> %s.", foto.getOriginalFilename());
@@ -45,6 +46,7 @@ public class FotoController {
     public String uploadArquivos(@RequestParam("fotos") MultipartFile[] fotos, RedirectAttributes redirectAttributes) {
         //TODO Proteger o sistema contra envio de arquivos não suportados
         //TODO Tratar erro de tentativa de upload de arquivo com tamanho superior ao definido nas configurações
+        //TODO Recriar WS para upload de arquivos.
         Arrays.asList(fotos)
                 .stream()
                 .forEach(foto -> discoService.salvarFoto(foto));
