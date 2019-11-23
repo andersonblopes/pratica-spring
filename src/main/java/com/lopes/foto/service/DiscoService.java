@@ -1,7 +1,8 @@
-package com.lopes.foto.modelo;
+package com.lopes.foto.service;
 
+import com.lopes.foto.exception.UploadArquivoException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -10,8 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-@Component
-public class Disco {
+@Service
+public class DiscoService {
 
     @Value("${contato.disco.raiz}")
     private String raiz;
@@ -31,7 +32,7 @@ public class Disco {
             Files.createDirectories(diretorioPath);
             arquivo.transferTo(arquivoPath.toFile());
         } catch (IOException e) {
-            throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);
+            throw new UploadArquivoException("Problemas na tentativa de salvar arquivo.", e);
         }
     }
 
